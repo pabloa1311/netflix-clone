@@ -13,7 +13,7 @@ const config = {
     appId: "1:747259552237:web:813149b5949b7f03f9c7e4",
     measurementId: "G-7KNF0GJF69"
   };
-
+// eslint-disable-next-line
 const firebase = window.firebase.initializeApp(config);
 
 ReactDOM.render(
