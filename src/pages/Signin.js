@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { FirebaseContext } from '../context/firebase';
 import { Form } from '../components';
 import { HeaderContainer } from '../containers/header';
 import { FooterContainer } from '../containers/footer';
+import * as ROUTES from '../constants/routes';
 
 export default function Signin() {
-    // eslint-disable-next-line
+    const history = useHistory();
+    const { firebase } = useContext(FirebaseContext);
+
     const [error, setError] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
@@ -14,8 +19,16 @@ export default function Signin() {
     const handleSignin = (event) => {
         event.preventDefault();
         
-        // call in here to firebase to authenticate the user
-        // if there's an error, populate the error state
+        firebase
+            .auth()
+            .signInWithEmailAndPassword(emailAddress, password)
+            .then(() => {
+                setEmailAddress('');
+                setPassword('');
+                setError('');
+                history.push(ROUTES.BROWSE);
+            })
+            .catch((error) => setError(error.message));
     }
     
     return (
@@ -43,7 +56,7 @@ export default function Signin() {
                     </Form.Submit>
                     
                     <Form.Text>
-                        New to Netflix? <Form.Link to="/signup">Sign up now.</Form.Link>
+                        New to Netflix? <Form.Link to={ROUTES.SIGN_UP}>Sign up now.</Form.Link>
                     </Form.Text>    
                     <Form.TextSmall>
                         This page is protected by Google reCAPTCHA.
