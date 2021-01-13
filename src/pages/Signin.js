@@ -4,6 +4,7 @@ import { HeaderContainer } from '../containers/header';
 import { FooterContainer } from '../containers/footer';
 
 export default function Signin() {
+    // eslint-disable-next-line
     const [error, setError] = useState('');
     const [emailAddress, setEmailAddress] = useState('');
     const [password, setPassword] = useState('');
