@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { App } from './App';
 import {GlobalStyles} from "./global-styles"
 import { FirebaseContext } from './context/firebase';
-// eslint-disable-next-line
-import { seedDatabase } from './seed';
 
 const config = {
     apiKey: "AIzaSyDr1prye4PhUIssN0QUV8aw4VpA6okP5gQ",
@@ -17,8 +15,6 @@ const config = {
   };
 // eslint-disable-next-line
 const firebase = window.firebase.initializeApp(config);
-
-seedDatabase(firebase);
 
 ReactDOM.render(
     <>
