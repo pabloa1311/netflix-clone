@@ -18,6 +18,8 @@ const config = {
 // eslint-disable-next-line
 const firebase = window.firebase.initializeApp(config);
 
+seedDatabase(firebase);
+
 ReactDOM.render(
     <>
         <FirebaseContext.Provider value={{ firebase: window.firebase }}>
