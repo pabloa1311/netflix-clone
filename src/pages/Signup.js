@@ -33,7 +33,7 @@ export default function Signup() {
                     setEmailAddress('');
                     setPassword('');
                     setError('');
-                    history.push(ROUTES.BROWSE);
+                    history.push(ROUTES.SIGN_IN);
                 })
             ).catch((error) => setError(error.message));
     };
