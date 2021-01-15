@@ -5,6 +5,7 @@ export default function useContent(target) {
     const [content, setContent] = useState([]);
     const { firebase } = useContext(FirebaseContext);
     
+    eslint-disable-next-line
     useEffect(() => {
         firebase
             .firestore()
