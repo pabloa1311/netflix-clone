@@ -5,7 +5,7 @@ export default function useContent(target) {
     const [content, setContent] = useState([]);
     const { firebase } = useContext(FirebaseContext);
     
-    eslint-disable-next-line
+    //eslint-disable-next-line
     useEffect(() => {
         firebase
             .firestore()
@@ -22,6 +22,7 @@ export default function useContent(target) {
             .catch((error) => {
                 console.log(error.message);
             });
+//eslint-disable-next-line            
     }, [])
     
     return { [target]: content };
