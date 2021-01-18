@@ -5,6 +5,7 @@ import * as ROUTES from '../constants/routes';
 import { FirebaseContext } from '../context/firebase';
 import { SelectProfileContainer } from './profiles';
 import { FooterContainer } from './footer';
+import { useAuthListener } from '../hooks';
 
 export function BrowseContainer({ slides }) {
     const [category, setCategory] = useState('series');
@@ -12,11 +13,13 @@ export function BrowseContainer({ slides }) {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [slideRows, setSlideRows] = useState([]);
+
+    const { user } = useAuthListener();
     
     const { firebase } = useContext(FirebaseContext);
     // eslint-disable-next-line
-    const user = {
-        displayName: "Karl",
+    const userInfo = {
+        displayName: user,
         photoURL: "1"
     };
     
@@ -24,7 +27,7 @@ export function BrowseContainer({ slides }) {
         setTimeout(() => {
             setLoading(false)
         }, 3000);
-    }, [user])
+    }, [userInfo])
     
     useEffect(() => {
         setSlideRows(slides[category]);
@@ -44,7 +47,7 @@ export function BrowseContainer({ slides }) {
     
     return profile.displayName ? (
         <>
-        {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
+        {loading ? <Loading src={userInfo.photoURL} /> : <Loading.ReleaseBody />}
         
             <Header src="joker1" dontShowOnSmallViewPort>
                 <Header.Frame>
@@ -64,11 +67,11 @@ export function BrowseContainer({ slides }) {
                     <Header.Group>
                         <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                         <Header.Profile>
-                            <Header.Picture src={user.photoURL} />
+                            <Header.Picture src={userInfo.photoURL} />
                             <Header.Dropdown>
                                 <Header.Group>
-                                    <Header.Picture src={user.photoURL} />
-                                    <Header.Link>{user.displayName}</Header.Link>
+                                    <Header.Picture src={userInfo.photoURL} />
+                                    <Header.Link>{userInfo.displayName}</Header.Link>
                                 </Header.Group>
                                 <Header.Group>
                                     <Header.Link onClick={() => firebase.auth().signOut()}>
