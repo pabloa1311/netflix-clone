@@ -19,7 +19,7 @@ export function BrowseContainer({ slides }) {
     const { firebase } = useContext(FirebaseContext);
     // eslint-disable-next-line
     const userInfo = {
-        displayName: user ? user.displayName : "Profile",
+        displayName: user.displayName,
         photoURL: "1"
     };
     
