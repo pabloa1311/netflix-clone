@@ -12,10 +12,9 @@ export default function useAuthListener() {
                 setUser(authUser);
             } else {
                 localStorage.removeItem('authUser');
-                setUser(null);
+                setUser("");
             }
         });
-        
         return () => listener();
 // eslint-disable-next-line
     }, []);
